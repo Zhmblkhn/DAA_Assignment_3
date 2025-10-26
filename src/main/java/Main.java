@@ -16,11 +16,16 @@ public class Main {
 
         String outputCSV = "src/main/resources/output_table.csv";
         List<String[]> results = new ArrayList<>();
-        results.add(new String[]{"File", "GraphID", "Vertices", "Kruskal(ms)", "Prim(ms)", "MST Cost"});
+        results.add(new String[]{
+                "File", "GraphID", "Vertices",
+                "Kruskal(ms)", "Prim(ms)",
+                "Kruskal Ops", "Prim Ops", "MST Cost"
+        });
 
         for (String inputPath : inputFiles) {
             Map<String, Graph> graphs = new TreeMap<>(
-                    Comparator.comparingInt(key -> Integer.parseInt(key)));
+                    Comparator.comparingInt(key -> Integer.parseInt(key))
+            );
             graphs.putAll(JsonIO.readGraphs(inputPath));
 
             for (Map.Entry<String, Graph> entry : graphs.entrySet()) {
@@ -34,8 +39,10 @@ public class Main {
                         inputPath.substring(inputPath.lastIndexOf("/") + 1),
                         id,
                         String.valueOf(g.getVertices()),
-                        String.valueOf(kruskal.getExecutionTime() / 1_000_000.0),
-                        String.valueOf(prim.getExecutionTime() / 1_000_000.0),
+                        String.format(Locale.US, "%.3f", kruskal.getExecutionTime() / 1_000_000.0),
+                        String.format(Locale.US, "%.3f", prim.getExecutionTime() / 1_000_000.0),
+                        String.valueOf(kruskal.getOperationCount()),
+                        String.valueOf(prim.getOperationCount()),
                         String.valueOf(kruskal.getTotalWeight())
                 });
             }
