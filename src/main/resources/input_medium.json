@@ -1,5 +1,5 @@
 {
-  "11": {
+  "15": {
     "vertices": 300,
     "edges": [
       {
@@ -3494,7 +3494,7 @@
       }
     ]
   },
-  "7": {
+  "8": {
     "vertices": 100,
     "edges": [
       {
@@ -4499,7 +4499,7 @@
       }
     ]
   },
-  "8": {
+  "10": {
     "vertices": 150,
     "edges": [
       {
@@ -5999,7 +5999,7 @@
       }
     ]
   },
-  "9": {
+  "11": {
     "vertices": 200,
     "edges": [
       {
@@ -7999,7 +7999,7 @@
       }
     ]
   },
-  "10": {
+  "13": {
     "vertices": 250,
     "edges": [
       {
@@ -10493,5 +10493,126 @@
         "weight": 81
       }
     ]
+  },
+  "7": {
+    "vertices": 75,
+    "edges": [
+      {
+        "src": 0,
+        "dest": 1,
+        "weight": 10
+      },
+      {
+        "src": 1,
+        "dest": 2,
+        "weight": 15
+      },
+      {
+        "src": 2,
+        "dest": 3,
+        "weight": 20
+      },
+      {
+        "src": 3,
+        "dest": 4,
+        "weight": 25
+      },
+      {
+        "src": 4,
+        "dest": 0,
+        "weight": 30
+      }
+    ]
+  },
+  "9": {
+    "vertices": 125,
+    "edges": [
+      {
+        "src": 0,
+        "dest": 1,
+        "weight": 8
+      },
+      {
+        "src": 1,
+        "dest": 2,
+        "weight": 12
+      },
+      {
+        "src": 2,
+        "dest": 3,
+        "weight": 18
+      },
+      {
+        "src": 3,
+        "dest": 4,
+        "weight": 22
+      },
+      {
+        "src": 4,
+        "dest": 5,
+        "weight": 27
+      }
+    ]
+  },
+  "12": {
+    "vertices": 225,
+    "edges": [
+      {
+        "src": 0,
+        "dest": 1,
+        "weight": 7
+      },
+      {
+        "src": 1,
+        "dest": 2,
+        "weight": 9
+      },
+      {
+        "src": 2,
+        "dest": 3,
+        "weight": 11
+      },
+      {
+        "src": 3,
+        "dest": 4,
+        "weight": 14
+      },
+      {
+        "src": 4,
+        "dest": 5,
+        "weight": 17
+      }
+    ]
+  },
+  "14": {
+    "vertices": 275,
+    "edges": [
+      {
+        "src": 0,
+        "dest": 1,
+        "weight": 5
+      },
+      {
+        "src": 1,
+        "dest": 2,
+        "weight": 9
+      },
+      {
+        "src": 2,
+        "dest": 3,
+        "weight": 13
+      },
+      {
+        "src": 3,
+        "dest": 4,
+        "weight": 17
+      },
+      {
+        "src": 4,
+        "dest": 0,
+        "weight": 21
+      }
+    ]
   }
 }
+
