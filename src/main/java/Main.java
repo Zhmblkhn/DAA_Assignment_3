@@ -3,28 +3,52 @@ import algorithms.*;
 import io.JsonIO;
 
 import java.util.*;
+import java.io.FileWriter;
 
 public class Main {
     public static void main(String[] args) {
-        String inputPath = "src/main/resources/data/input.json";
-        String outputKruskal = "src/main/resources/data/output_kruskal.json";
-        String outputPrim = "src/main/resources/data/output_prim.json";
+        String[] inputFiles = {
+                "src/main/resources/input_small.json",
+                "src/main/resources/input_medium.json",
+                "src/main/resources/input_large.json",
+                "src/main/resources/input_extralarge.json"
+        };
 
-        Map<String, Graph> graphs = JsonIO.readGraphs(inputPath);
-        Map<String, MSTResult> kruskalResults = new HashMap<>();
-        Map<String, MSTResult> primResults = new HashMap<>();
+        String outputCSV = "src/main/resources/output_table.csv";
+        List<String[]> results = new ArrayList<>();
+        results.add(new String[]{"File", "GraphID", "Vertices", "Kruskal(ms)", "Prim(ms)", "MST Cost"});
 
-        for (Map.Entry<String, Graph> entry : graphs.entrySet()) {
-            String id = entry.getKey();
-            Graph g = entry.getValue();
+        for (String inputPath : inputFiles) {
+            Map<String, Graph> graphs = new TreeMap<>(
+                    Comparator.comparingInt(key -> Integer.parseInt(key)));
+            graphs.putAll(JsonIO.readGraphs(inputPath));
 
-            kruskalResults.put(id, KruskalAlgorithm.findMST(g));
-            primResults.put(id, PrimAlgorithm.findMST(g));
+            for (Map.Entry<String, Graph> entry : graphs.entrySet()) {
+                String id = entry.getKey();
+                Graph g = entry.getValue();
+
+                MSTResult kruskal = KruskalAlgorithm.findMST(g);
+                MSTResult prim = PrimAlgorithm.findMST(g);
+
+                results.add(new String[]{
+                        inputPath.substring(inputPath.lastIndexOf("/") + 1),
+                        id,
+                        String.valueOf(g.getVertices()),
+                        String.valueOf(kruskal.getExecutionTime() / 1_000_000.0),
+                        String.valueOf(prim.getExecutionTime() / 1_000_000.0),
+                        String.valueOf(kruskal.getTotalWeight())
+                });
+            }
         }
 
-        JsonIO.writeResults(outputKruskal, kruskalResults);
-        JsonIO.writeResults(outputPrim, primResults);
-
-        System.out.println("Results written to output_kruskal.json and output_prim.json");
+        try (FileWriter writer = new FileWriter(outputCSV)) {
+            for (String[] row : results) {
+                writer.write(String.join(",", row) + "\n");
+            }
+            writer.flush();
+            System.out.println("Results saved to " + outputCSV);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
